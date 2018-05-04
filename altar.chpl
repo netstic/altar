@@ -20,9 +20,43 @@
  * Github: @marcoscleison
  */
 module Main{
+use Altar;
+use Time;
+
+
+    class CommandTest1:Command{
+      proc  init(){
+            super.init("test","Test command");
+        }
+         proc this(args:[?D]){
+            writeln("Executing test command",args);
+         }
+
+    }
+
+    class CommandTest2:Command{
+      proc  init(){
+            super.init("test","Test command");
+        }
+         proc this(args:[?D]){
+            writeln("Executing test command2:",args);
+         }
+
+    }
+
 
     proc main(args: [] string) {
+    
+        write_logo();
+        var commander = new CommandEngine();
 
+        var cmd_test=new CommandTest1();
+        var cmd_test2=new CommandTest2();
+
+        commander.addCommand("test",cmd_test);
+        commander.addCommand("test2",cmd_test2);
+        
+        commander.Execute(args);
 
     }
 
